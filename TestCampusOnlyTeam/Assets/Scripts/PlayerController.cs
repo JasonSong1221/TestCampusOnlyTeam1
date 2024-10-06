@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 
 public class PlayerController : MonoBehaviour
@@ -10,12 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int jumpMax;
     [SerializeField] float jumpSpeed;
     [SerializeField] float gravity;
+    [SerializeField] float fireRate;
+    [SerializeField] float shootRange;
+    [SerializeField] LayerMask ignore;
+    [SerializeField] Camera cam;
     [SerializeField] CharacterController controller;
 
     Vector3 movementDir;
     int jumpCount;
     Vector3 playerVelocity;
-
+    bool isShooting;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +56,56 @@ public class PlayerController : MonoBehaviour
 
         //if (Input.GetButton("Fire1") && !gameManager.instance.isPaused && !isShooting)
         //{
-            //StartCoroutine(shoot());
+        //StartCoroutine(shoot());
         //}
+
+        if (Input.GetButton("Fire1") && !isShooting)
+        {
+            StartCoroutine(shoot());
+        }
+
+        if (!isShooting)
+        {
+            Animator ani = GetComponentInChildren<Animator>();
+            if (ani != null)
+            {
+                ani.Play("Idle");
+            }
+        }
+    }
+
+    IEnumerator shoot()
+    {
+        isShooting = true;
+
+        GetComponent<AudioSource>().Play();
+
+        Animator ani = GetComponentInChildren<Animator>();
+        if (ani != null)
+        {
+            ani.Play("Fire");
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shootRange, ~ignore))
+        {
+            
+
+
+            Debug.Log(hit.collider.name);
+            //IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+            //if (dmg != null)
+            //{
+                //dmg.takeDamage(shootDamage);
+            //}
+
+
+
+        }
+
+
+        yield return new WaitForSeconds(fireRate);
+
+        isShooting = false;
     }
 }
