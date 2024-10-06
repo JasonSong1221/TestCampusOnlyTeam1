@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+//using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class EnemyAI : MonoBehaviour, IDamage, IMonster
 {
     [SerializeField] int health;
 
@@ -30,7 +31,16 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         //gameManager.instance.updateGameGoal(1);
+        
+        
     }
+
+    void Awake()
+    {
+        
+    }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -60,8 +70,19 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (health <= 0)
         {
             //gameManager.instance.updateGameGoal(-1);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            Die();
         }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public string Type()
+    {
+        return "dummy";
     }
 
     IEnumerator flashColor()
@@ -70,4 +91,5 @@ public class EnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
     }
+
 }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public interface IDamage
+public interface IMonster
 {
-    void takeDamage(int amount);
+    public void Die();
+    public string Type();
 }
