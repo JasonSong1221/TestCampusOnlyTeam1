@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] CharacterController controller;
     [SerializeField] GameObject gunImpactEffect;
+    [SerializeField] int shootDMG;
 
     Vector3 movementDir;
     int jumpCount;
@@ -105,12 +106,12 @@ public class PlayerController : MonoBehaviour
             //GameObject.FindGameObjectWithTag("debug_cube").transform.position = hit.point;
 
             Debug.Log(hit.collider.name);
-            //IDamage dmg = hit.collider.GetComponent<IDamage>();
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            //if (dmg != null)
-            //{
-                //dmg.takeDamage(shootDamage);
-            //}
+            if (dmg != null)
+            {
+                dmg.takeDamage(shootDMG);
+            }
 
 
 
