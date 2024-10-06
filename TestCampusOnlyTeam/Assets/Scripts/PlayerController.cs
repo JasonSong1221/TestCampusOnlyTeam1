@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.RestService;
+using Unity.VisualScripting;
+
+//using UnityEditor.Experimental.RestService;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -19,17 +21,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] GameObject gunImpactEffect;
     [SerializeField] int shootDMG;
+    [SerializeField] int jumpDMG;
+    [SerializeField] GameObject weapon;
 
     Vector3 movementDir;
     int jumpCount;
     Vector3 playerVelocity;
     bool isShooting;
+    bool continuousFire;
     //GameObject pe;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        continuousFire = false;
     }
 
     // Update is called once per frame
@@ -63,64 +68,85 @@ public class PlayerController : MonoBehaviour
         //StartCoroutine(shoot());
         //}
 
-        if (Input.GetButton("Fire1") && !isShooting)
+        //if (Input.GetButton("Fire1") && !isShooting)
+        //{
+        //    StartCoroutine(shoot());
+        //}
+
+        if (Input.GetButton("Fire1"))
         {
-            StartCoroutine(shoot());
+            IWeapon currentWeapon = weapon.GetComponent<IWeapon>();
+            currentWeapon.Fire(continuousFire);
+            continuousFire = true;
         }
 
-        if (!isShooting)
+        if (Input.GetButtonUp("Fire1"))
         {
-            Animator ani = GetComponentInChildren<Animator>();
-            if (ani != null)
+            continuousFire = false;
+        }
+
+        if(Input.GetButtonDown("Reload"))
+        {
+            if (!continuousFire)
             {
-                ani.Play("Idle");
-                
+                IWeapon currentWeapon = weapon.GetComponent<IWeapon>();
+                currentWeapon.Reload();
             }
         }
+
+        //if (!isShooting)
+        //{
+        //    Animator ani = GetComponentInChildren<Animator>();
+        //    if (ani != null)
+        //    {
+        //        ani.Play("Idle");
+
+        //    }
+        //}
     }
 
-    IEnumerator shoot()
-    {
-        isShooting = true;
+    //    IEnumerator shoot()
+    //    {
+    //        isShooting = true;
 
-        GetComponent<AudioSource>().Play();
+    //        GetComponent<AudioSource>().Play();
 
-        Animator ani = GetComponentInChildren<Animator>();
-        if (ani != null)
-        {
-            ani.Play("Fire");
+    //        Animator ani = GetComponentInChildren<Animator>();
+    //        if (ani != null)
+    //        {
+    //            ani.Play("Fire");
 
-        }
-        RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shootRange, ~ignore))
-        {
-            Vector3 playerDir = Vector3.Normalize(hit.point - transform.position);
-            Vector3 position = hit.point - (playerDir * 0.3f);
+    //        }
+    //        RaycastHit hit;
+    //        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shootRange, ~ignore))
+    //        {
+    //            Vector3 playerDir = Vector3.Normalize(hit.point - transform.position);
+    //            Vector3 position = hit.point - (playerDir * 0.3f);
 
-            Quaternion up = new Quaternion();
+    //            Quaternion up = new Quaternion();
 
-            up = Quaternion.LookRotation(Vector3.up);
+    //            up = Quaternion.LookRotation(Vector3.up);
 
-            Instantiate(gunImpactEffect, position, up);
-            //pe = Instantiate(gunImpactEffect, hit.point, new Quaternion());
-            //GameObject.FindGameObjectWithTag("debug_cube").transform.position = hit.point;
+    //            Instantiate(gunImpactEffect, position, up);
+    //            //pe = Instantiate(gunImpactEffect, hit.point, new Quaternion());
+    //            //GameObject.FindGameObjectWithTag("debug_cube").transform.position = hit.point;
 
-            Debug.Log(hit.collider.name);
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
+    //            Debug.Log(hit.collider.name);
+    //            IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null)
-            {
-                dmg.takeDamage(shootDMG);
-            }
-
-
-
-        }
+    //            if (dmg != null)
+    //            {
+    //                dmg.takeDamage(shootDMG);
+    //            }
 
 
-        yield return new WaitForSeconds(fireRate);
-        ani.Play("Idle");
 
-        isShooting = false;
-    }
+    //        }
+
+
+    //        yield return new WaitForSeconds(fireRate);
+    //        ani.Play("Idle");
+
+    //        isShooting = false;
+    //    }
 }

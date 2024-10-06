@@ -45,7 +45,6 @@ public class gamemanager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F1))
         {
             killAllMonsters();
-            Debug.Log("FUCK");
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
