@@ -685,12 +685,16 @@ PrefabInstance:
       objectReference: {fileID: 2055672467}
     - target: {fileID: 3303543350053890566, guid: 16de1753c2e0865459857cdf675ca468, type: 3}
       propertyPath: shootRange
-      value: 300
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 3303543350053890566, guid: 16de1753c2e0865459857cdf675ca468, type: 3}
       propertyPath: ignore.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 3303543350053890566, guid: 16de1753c2e0865459857cdf675ca468, type: 3}
+      propertyPath: gunImpactEffect
+      value: 
+      objectReference: {fileID: 6522661522069712304, guid: 2577b7a6f96623a418771234aacb4213, type: 3}
     - target: {fileID: 6069108695476611756, guid: 16de1753c2e0865459857cdf675ca468, type: 3}
       propertyPath: m_RootOrder
       value: 0

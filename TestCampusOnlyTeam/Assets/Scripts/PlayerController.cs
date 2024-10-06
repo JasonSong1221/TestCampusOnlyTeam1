@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.RestService;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -16,11 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask ignore;
     [SerializeField] Camera cam;
     [SerializeField] CharacterController controller;
+    [SerializeField] GameObject gunImpactEffect;
 
     Vector3 movementDir;
     int jumpCount;
     Vector3 playerVelocity;
     bool isShooting;
+    //GameObject pe;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
             if (ani != null)
             {
                 ani.Play("Idle");
+                
             }
         }
     }
@@ -84,12 +88,21 @@ public class PlayerController : MonoBehaviour
         if (ani != null)
         {
             ani.Play("Fire");
+
         }
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shootRange, ~ignore))
         {
-            
+            Vector3 playerDir = Vector3.Normalize(hit.point - transform.position);
+            Vector3 position = hit.point - (playerDir * 0.3f);
 
+            Quaternion up = new Quaternion();
+
+            up = Quaternion.LookRotation(Vector3.up);
+
+            Instantiate(gunImpactEffect, position, up);
+            //pe = Instantiate(gunImpactEffect, hit.point, new Quaternion());
+            //GameObject.FindGameObjectWithTag("debug_cube").transform.position = hit.point;
 
             Debug.Log(hit.collider.name);
             //IDamage dmg = hit.collider.GetComponent<IDamage>();
@@ -105,6 +118,7 @@ public class PlayerController : MonoBehaviour
 
 
         yield return new WaitForSeconds(fireRate);
+        ani.Play("Idle");
 
         isShooting = false;
     }

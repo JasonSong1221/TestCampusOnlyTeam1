@@ -200,6 +200,7 @@ MonoBehaviour:
     m_Bits: 0
   cam: {fileID: 0}
   controller: {fileID: 0}
+  gunImpactEffect: {fileID: 0}
 --- !u!143 &2510626143533986106
 CharacterController:
   m_ObjectHideFlags: 0
