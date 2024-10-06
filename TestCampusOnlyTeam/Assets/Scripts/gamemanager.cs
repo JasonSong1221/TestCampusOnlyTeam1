@@ -14,6 +14,9 @@ public class gamemanager : MonoBehaviour
     List<Vector3> MonsterPositionCache = new List<Vector3>();
     List<Quaternion> MonsterRotationCache = new List<Quaternion>();
 
+    Vector3 playerPositionCache;
+    Quaternion playerRotationCache;
+
     [SerializeField] GameObject dummy;
 
     float timeScaleOrig;
@@ -50,8 +53,21 @@ public class gamemanager : MonoBehaviour
             resetMonsters();
         }
 
-        if(dirtyCache)
+        if (Input.GetKeyDown(KeyCode.F3))
         {
+            resetPlayer();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            resetPlayer();
+            resetMonsters();
+        }
+
+        if (dirtyCache)
+        {
+            cachePlayer();
+
             GameObject[] gos;
             gos = GameObject.FindGameObjectsWithTag("monster");
 
@@ -67,19 +83,27 @@ public class gamemanager : MonoBehaviour
     {
         MonsterPositionCache.Clear();
         MonsterRotationCache.Clear();
-
-
     }
 
-    
 
-    public void pushMonster(GameObject monster)
+    void cachePlayer()
+    {
+        playerPositionCache = player.transform.position;
+        playerRotationCache = player.transform.rotation;
+    }
+
+    void resetPlayer()
+    {
+        player.transform.position = playerPositionCache;
+        player.transform.rotation = playerRotationCache;
+    }
+
+    void pushMonster(GameObject monster)
     {
         Vector3 pos = new Vector3(monster.transform.position.x, monster.transform.position.y, monster.transform.position.z);
         Quaternion quat = new Quaternion(monster.transform.rotation.x, monster.transform.rotation.y, monster.transform.rotation.z, monster.transform.rotation.w);
         MonsterPositionCache.Add(pos);
         MonsterRotationCache.Add(quat);
-
     }
 
     void killAllMonsters()

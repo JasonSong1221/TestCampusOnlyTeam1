@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2510626143533986106}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,6 +201,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   controller: {fileID: 0}
   gunImpactEffect: {fileID: 0}
+  shootDMG: 0
 --- !u!143 &2510626143533986106
 CharacterController:
   m_ObjectHideFlags: 0
