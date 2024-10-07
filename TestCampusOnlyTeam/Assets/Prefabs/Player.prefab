@@ -547,6 +547,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6049774686207117214, guid: 015ffc56bc461494d84fdc44f7d65537, type: 3}
+      propertyPath: MainCamera
+      value: 
+      objectReference: {fileID: 7818840124408648769}
+    - target: {fileID: 6049774686207117214, guid: 015ffc56bc461494d84fdc44f7d65537, type: 3}
+      propertyPath: ignore.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049774686207117214, guid: 015ffc56bc461494d84fdc44f7d65537, type: 3}
+      propertyPath: gunImpactEffect
+      value: 
+      objectReference: {fileID: 6522661522069712304, guid: 2577b7a6f96623a418771234aacb4213, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 015ffc56bc461494d84fdc44f7d65537, type: 3}
 --- !u!1 &2013332639468525803 stripped
@@ -618,6 +630,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6049774686207117214, guid: d4e8b76f1fb901541af8431e34ac0da6, type: 3}
+      propertyPath: MainCamera
+      value: 
+      objectReference: {fileID: 7818840124408648769}
+    - target: {fileID: 6049774686207117214, guid: d4e8b76f1fb901541af8431e34ac0da6, type: 3}
+      propertyPath: ignore.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049774686207117214, guid: d4e8b76f1fb901541af8431e34ac0da6, type: 3}
+      propertyPath: gunImpactEffect
+      value: 
+      objectReference: {fileID: 6522661522069712304, guid: 2577b7a6f96623a418771234aacb4213, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4e8b76f1fb901541af8431e34ac0da6, type: 3}
 --- !u!4 &5399477187408781988 stripped

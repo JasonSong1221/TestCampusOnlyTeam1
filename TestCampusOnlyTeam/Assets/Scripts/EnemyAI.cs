@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 //using UnityEditor.UI;
@@ -63,9 +64,10 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
     }
 
 
-    public void takeDamage(int damage)
+    public void takeDamage(int damage, Vector3 impulsePosition)
     {
         health -= damage;
+        GetComponent<Rigidbody>().AddExplosionForce(75, impulsePosition, 20, 0);
         StartCoroutine(flashColor());
         if (health <= 0)
         {

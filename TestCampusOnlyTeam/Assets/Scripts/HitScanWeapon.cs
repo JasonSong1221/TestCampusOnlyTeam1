@@ -130,7 +130,7 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
             if (Physics.Raycast(raycastPos, castDir, out hit, range, ~ignore))
             {
                 Vector3 playerDir = Vector3.Normalize(hit.point - transform.position);
-                Vector3 position = hit.point - (playerDir * 0.3f);
+                Vector3 position = hit.point - (playerDir * 0.003f);
 
                 Quaternion up = new Quaternion();
 
@@ -145,7 +145,7 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
 
                 if (dmg != null)
                 {
-                    dmg.takeDamage(damage);
+                    dmg.takeDamage(damage, hit.point);
                 }
 
             }
@@ -154,7 +154,7 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
 
 
         yield return new WaitForSeconds(fireRate);
-        //ani.Play("Idle");
+        ani.Play("Idle");
 
         isShooting = false;
     }

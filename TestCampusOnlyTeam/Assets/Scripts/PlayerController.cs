@@ -15,14 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int jumpMax;
     [SerializeField] float jumpSpeed;
     [SerializeField] float gravity;
-    [SerializeField] float fireRate;
-    [SerializeField] float shootRange;
-    [SerializeField] LayerMask ignore;
     [SerializeField] Camera cam;
     [SerializeField] CharacterController controller;
-    [SerializeField] GameObject gunImpactEffect;
-    [SerializeField] int shootDMG;
-    [SerializeField] int jumpDMG;
     [SerializeField] GameObject currentWeapon;
     [SerializeField] GameObject handgun;
     [SerializeField] GameObject shotgun;
