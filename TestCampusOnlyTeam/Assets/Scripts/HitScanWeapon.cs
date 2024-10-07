@@ -18,6 +18,7 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
     [SerializeField] int startAmmo;
     [SerializeField] int maxAmmo;
     [SerializeField] int clipSize;
+    [SerializeField] int totalCasts;
 
     bool isShooting;
     int continuousShots;
@@ -110,40 +111,44 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
             ani.Play("Fire");
 
         }
-        RaycastHit hit;
-        Vector3 raycastPos = MainCamera.transform.position;
-        Vector3 castDir = MainCamera.transform.forward;
 
-        spread = spreadRate * continuousShots;
-        spread = Mathf.Clamp(spread, minSpread, maxSpread);
-
-        castDir.x += spread * UnityEngine.Random.Range(0.0f, 1.0f);
-        castDir.y += spread * UnityEngine.Random.Range(0.0f, 1.0f);
-        castDir.z += spread * UnityEngine.Random.Range(0.0f, 1.0f);
-
-
-        if (Physics.Raycast(raycastPos, castDir, out hit, range, ~ignore))
+        for (int i = 0; i < totalCasts; ++i)
         {
-            Vector3 playerDir = Vector3.Normalize(hit.point - transform.position);
-            Vector3 position = hit.point - (playerDir * 0.3f);
 
-            Quaternion up = new Quaternion();
+            RaycastHit hit;
+            Vector3 raycastPos = MainCamera.transform.position;
+            Vector3 castDir = MainCamera.transform.forward;
 
-            up = Quaternion.LookRotation(Vector3.up);
+            spread = spreadRate * continuousShots;
+            spread = Mathf.Clamp(spread, minSpread, maxSpread);
 
-            Instantiate(gunImpactEffect, position, up);
-            //pe = Instantiate(gunImpactEffect, hit.point, new Quaternion());
-            //GameObject.FindGameObjectWithTag("debug_cube").transform.position = hit.point;
+            castDir.x += spread * UnityEngine.Random.Range(0.0f, 1.0f);
+            castDir.y += spread * UnityEngine.Random.Range(0.0f, 1.0f);
+            castDir.z += spread * UnityEngine.Random.Range(0.0f, 1.0f);
 
-            Debug.Log(hit.collider.name);
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null)
+            if (Physics.Raycast(raycastPos, castDir, out hit, range, ~ignore))
             {
-                dmg.takeDamage(damage);
+                Vector3 playerDir = Vector3.Normalize(hit.point - transform.position);
+                Vector3 position = hit.point - (playerDir * 0.3f);
+
+                Quaternion up = new Quaternion();
+
+                up = Quaternion.LookRotation(Vector3.up);
+
+                Instantiate(gunImpactEffect, position, up);
+                //pe = Instantiate(gunImpactEffect, hit.point, new Quaternion());
+                //GameObject.FindGameObjectWithTag("debug_cube").transform.position = hit.point;
+
+                Debug.Log(hit.collider.name);
+                IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+                if (dmg != null)
+                {
+                    dmg.takeDamage(damage);
+                }
+
             }
-
-
 
         }
 
