@@ -26,6 +26,7 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
     int clipCurrent;
     int maxClips;
     float spread;
+    bool isReloading;
 
 
 
@@ -63,14 +64,14 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
 
     virtual public void Reload()
     {
-        if(ammo > 0 && clipCurrent < clipSize)
+        if (!isReloading && !isShooting)
         {
-            int amtToAdd = Mathf.Clamp(clipSize - clipCurrent, 0, ammo);
-            clipCurrent += amtToAdd;
+            StartCoroutine(reload());
+
         }
     }
 
-    // Start is called before the first frame update
+        // Start is called before the first frame update
     void Start()
     {
         if (maxAmmo % clipSize != 0)
@@ -84,7 +85,7 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
     // Update is called once per frame
     void Update()
     {
-        if (!isShooting)
+        if (!isShooting && !isReloading)
         {
             Animator ani = GetComponentInChildren<Animator>();
             if (ani != null)
@@ -158,4 +159,27 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
 
         isShooting = false;
     }
+
+    IEnumerator reload()
+    {
+
+        Animator ani = GetComponentInChildren<Animator>();
+
+        if (ammo > 0 && clipCurrent < clipSize)
+        {
+            isReloading = true;
+            
+            if (ani != null)
+            {
+                ani.Play("Reload");
+
+            }
+            yield return new WaitForSeconds(0.5f);
+            int amtToAdd = Mathf.Clamp(clipSize - clipCurrent, 0, ammo);
+            clipCurrent += amtToAdd;
+        }
+        isReloading = false;
+        ani.Play("Idle");
+    }
+
 }
