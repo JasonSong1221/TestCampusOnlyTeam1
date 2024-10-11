@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour, EnemyDamage
     [SerializeField] GameObject submachinegun;
     Vector3 movementDir;
     int jumpCount;
+    int HPOrig;
     Vector3 playerVelocity;
     bool isShooting;
     bool continuousFire;
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour, EnemyDamage
     void Start()
     {
         continuousFire = false;
+        HPOrig = health;
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -132,12 +135,20 @@ public class PlayerController : MonoBehaviour, EnemyDamage
     public void takeDamage(int amount)
     {
         health -= amount;
+        updatePlayerUI();
 
         if (health <= 0)
         {
             gamemanager.instance.youLose();
         }
     }
+
+    public void updatePlayerUI()
+    {
+        gamemanager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
+
+    }
+
     void sprint()
     {
         if (Input.GetButtonDown("Sprint"))
