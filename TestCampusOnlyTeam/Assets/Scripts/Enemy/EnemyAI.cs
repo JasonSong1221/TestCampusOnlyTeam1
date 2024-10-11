@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
     void Start()
     {
         colorOrig = model.material.color;
-        //gameManager.instance.updateGameGoal(1);
+        gamemanager.instance.updateGameGoal(1);
         
         
     }
@@ -88,7 +88,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
         StartCoroutine(flashColor());
         if (health <= 0)
         {
-            //gameManager.instance.updateGameGoal(-1);
+            gamemanager.instance.updateGameGoal(-1);
             //Destroy(gameObject);
             Die();
         }
