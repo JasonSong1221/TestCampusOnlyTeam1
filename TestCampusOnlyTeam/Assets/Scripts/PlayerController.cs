@@ -132,6 +132,11 @@ public class PlayerController : MonoBehaviour, EnemyDamage
     public void takeDamage(int amount)
     {
         health -= amount;
+
+        if (health <= 0)
+        {
+            gamemanager.instance.youLose();
+        }
     }
     void sprint()
     {

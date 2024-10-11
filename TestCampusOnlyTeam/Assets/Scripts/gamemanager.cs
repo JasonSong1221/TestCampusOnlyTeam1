@@ -181,5 +181,12 @@ public class gamemanager : MonoBehaviour
             menuActive.SetActive(true);
         }
     }
+
+    public void youLose()
+    {
+        statePause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
     
 }
