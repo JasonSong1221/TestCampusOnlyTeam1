@@ -8,20 +8,21 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, EnemyDamage
 {
     [SerializeField] int health;
     [SerializeField] float speed;
     [SerializeField] int jumpMax;
     [SerializeField] float jumpSpeed;
     [SerializeField] float gravity;
+    [SerializeField] int sprintMod;
+
     [SerializeField] Camera cam;
     [SerializeField] CharacterController controller;
     [SerializeField] GameObject currentWeapon;
     [SerializeField] GameObject handgun;
     [SerializeField] GameObject shotgun;
     [SerializeField] GameObject submachinegun;
-
     Vector3 movementDir;
     int jumpCount;
     Vector3 playerVelocity;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movement();
+        sprint();
     }
 
     void movement()
@@ -125,5 +127,21 @@ public class PlayerController : MonoBehaviour
         currentWeapon.SetActive(true);
         yield return new WaitForSeconds(1);
         swapping = false;
+    }
+
+    public void takeDamage(int amount)
+    {
+        health -= amount;
+    }
+    void sprint()
+    {
+        if (Input.GetButtonDown("Sprint"))
+        {
+            speed *= sprintMod;
+        }
+        else if (Input.GetButtonUp("Sprint"))
+        {
+            speed /= sprintMod;
+        }
     }
 }

@@ -20,7 +20,7 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject dummy;
 
     float timeScaleOrig;
-    GameObject player;
+    public GameObject player;
 
     bool dirtyCache;
 
@@ -126,10 +126,7 @@ public class gamemanager : MonoBehaviour
         }
     }
 
-    private gamemanager()
-    {
-
-    }
+    
 
     
 }
