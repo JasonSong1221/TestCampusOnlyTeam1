@@ -39,12 +39,10 @@ public class BulletDamage : MonoBehaviour
         if (dmg != null)
         {
             dmg.takeDamage(damageAmount);
-        }
-
-        if (type == DamageType.bullet || type == DamageType.chaser)
-        {
             Destroy(gameObject);
         }
+
+        
 
     }
 
