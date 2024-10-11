@@ -33,15 +33,30 @@ public class spawnManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            startSpawning = true;
+        }
+    }
 
     IEnumerator spawn()
     {
         isSpawning = true;
         int transformArrayPosition = Random.Range(0, spawnPos.Length);
         int objectArrayPosition = Random.Range(0, spawnObjects.Length);
+        GameObject instantiated = Instantiate(spawnObjects[objectArrayPosition], spawnPos[transformArrayPosition].position, spawnPos[transformArrayPosition].rotation);
+        spawnList.Add(instantiated);
+        instantiated.transform.SetParent(transform);
+        spawnCount++;
+        isSpawning=false;
 
 
-        yield return null;
+
+
+
+        yield return new WaitForSeconds(spawnTime);
 
 
     }
