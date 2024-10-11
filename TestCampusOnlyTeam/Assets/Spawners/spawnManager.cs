@@ -6,8 +6,14 @@ public class spawnManager : MonoBehaviour
 {
     [SerializeField] GameObject spawnObjects;
     [SerializeField] public int numToSpawn;
+    [SerializeField] float spawnTime;
+    [SerializeField] Transform[] spawnPos;
+
+    public int spawnCount;
 
     bool isSpawning;
+    bool startSpawning;
+    public bool isObjectiveSpawner;
 
 
 
@@ -20,7 +26,10 @@ public class spawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(startSpawning && spawnCount < numToSpawn && !isSpawning)
+        {
+            StartCoroutine
+        }
     }
 
 
