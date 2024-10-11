@@ -136,11 +136,19 @@ public class PlayerController : MonoBehaviour, EnemyDamage
     {
         health -= amount;
         updatePlayerUI();
+        StartCoroutine(damageFlash());
 
         if (health <= 0)
         {
             gamemanager.instance.youLose();
         }
+    }
+
+    IEnumerator damageFlash()
+    {
+        gamemanager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gamemanager.instance.playerDamageScreen.SetActive(false);
     }
 
     public void updatePlayerUI()
