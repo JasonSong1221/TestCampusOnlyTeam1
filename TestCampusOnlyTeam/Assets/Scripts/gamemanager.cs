@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 //using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class gamemanager : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject dummy;
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuLose;
+    [SerializeField] TMP_Text enemyCountText;
+
+    public  int enemyCount;
 
     public bool isPaused;
 
@@ -161,6 +167,19 @@ public class gamemanager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+    }
+
+    public void updateGameGoal(int amount)
+    {
+        enemyCount += amount;
+        enemyCountText.text = enemyCount.ToString("F0");
+
+        if(enemyCount <= 0)
+        {
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
     }
     
 }
