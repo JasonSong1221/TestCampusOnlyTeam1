@@ -36,10 +36,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
         
     }
 
-    void Awake()
-    {
-        
-    }
+   
 
     
 
@@ -47,9 +44,23 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
     void Update()
     {
 
+        playerDir = gamemanager.instance.player.transform.position - transform.position;
+        agent.SetDestination(gamemanager.instance.player.transform.position);
+        if (playerInRange)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                faceTarget();
+            }
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
 
 
-        
+        }
+
+
     }
 
 
@@ -59,10 +70,16 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
         Vector3 look;
         look.x = playerDir.x;
         look.z = playerDir.z;
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.y));
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * rotationSpeed);
     }
-
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
 
     public void takeDamage(int damage, Vector3 impulsePosition)
     {
@@ -74,6 +91,21 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
             //gameManager.instance.updateGameGoal(-1);
             //Destroy(gameObject);
             Die();
+        }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
         }
     }
 
@@ -94,4 +126,5 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
         model.material.color = colorOrig;
     }
 
+    
 }
