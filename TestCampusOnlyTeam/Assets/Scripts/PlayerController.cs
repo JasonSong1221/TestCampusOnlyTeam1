@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour, EnemyDamage
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if (Input.GetButton("Fire1") && !swapping)
+        if (Input.GetButton("Fire1") &&!gamemanager.instance.isPaused&&!swapping)
         {
             if (currentWeapon != null)
             {

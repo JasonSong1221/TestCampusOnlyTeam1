@@ -20,6 +20,9 @@ public class gamemanager : MonoBehaviour
     Quaternion playerRotationCache;
 
     [SerializeField] GameObject dummy;
+    [SerializeField] GameObject Strongdummy;
+    [SerializeField] GameObject Strongestdummy;
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
