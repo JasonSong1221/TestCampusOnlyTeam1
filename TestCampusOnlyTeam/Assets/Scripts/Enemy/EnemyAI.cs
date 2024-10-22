@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
     void Start()
     {
         colorOrig = model.material.color;
-        //gameManager.instance.updateGameGoal(1);
+        gamemanager.instance.updateGameGoal(1);
         
         
     }
@@ -80,16 +80,18 @@ public class EnemyAI : MonoBehaviour, IDamage, IMonster
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
-
+    
     public void takeDamage(int damage, Vector3 impulsePosition)
     {
+        if (health <= 0) return; // Prevent further damage after death
+
         health -= damage;
-        GetComponent<Rigidbody>().AddExplosionForce(75, impulsePosition, 20, 0);
+        //GetComponent<Rigidbody>().AddExplosionForce(15, impulsePosition, 20, 0);
         StartCoroutine(flashColor());
+
         if (health <= 0)
         {
-            //gameManager.instance.updateGameGoal(-1);
-            //Destroy(gameObject);
+            gamemanager.instance.updateGameGoal(-1);
             Die();
         }
     }

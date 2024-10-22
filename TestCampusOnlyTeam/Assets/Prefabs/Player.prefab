@@ -190,21 +190,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dba10447c5960b42b84eac200108b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  speed: 0
-  jumpMax: 0
-  jumpSpeed: 0
-  gravity: 0
-  fireRate: 0
-  shootRange: 0
-  ignore:
-    serializedVersion: 2
-    m_Bits: 0
+  health: 3
+  speed: 6
+  jumpMax: 5
+  jumpSpeed: 5
+  gravity: 1
+  sprintMod: 8
   cam: {fileID: 0}
   controller: {fileID: 0}
-  gunImpactEffect: {fileID: 0}
-  shootDMG: 0
-  jumpDMG: 0
   currentWeapon: {fileID: 0}
   handgun: {fileID: 2505723887936038378}
   shotgun: {fileID: 2013332639468525803}
