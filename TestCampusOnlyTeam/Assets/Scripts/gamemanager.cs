@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 //using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class gamemanager : MonoBehaviour
 {
@@ -17,10 +19,25 @@ public class gamemanager : MonoBehaviour
     Vector3 playerPositionCache;
     Quaternion playerRotationCache;
 
+    [SerializeField] GameObject menuActive;
+    [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuLose;
+
+    [SerializeField] TMP_Text enemyCountText;
+
+    public Image playerHpBar;
+
+    public GameObject playerDamageScreen;
+
     [SerializeField] GameObject dummy;
 
     float timeScaleOrig;
     public GameObject player;
+
+    public bool isPaused;
+
+    int enemyCount;
 
     bool dirtyCache;
 
@@ -36,6 +53,21 @@ public class gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menuActive == null)
+            {
+                statePause();
+                menuActive = menuPause;
+                menuActive.SetActive(isPaused);
+            }
+            else if (menuActive == menuPause)
+            {
+                stateUnpause();
+            }
+        }
 
 
         if (Input.GetKeyDown(KeyCode.F1))
@@ -120,6 +152,44 @@ public class gamemanager : MonoBehaviour
         {
             Instantiate(dummy, MonsterPositionCache[i], MonsterRotationCache[i]);
         }
+    }
+
+    public void statePause()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void stateUnpause()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = timeScaleOrig;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        menuActive.SetActive(false);
+        menuActive = null;
+    }
+
+    public void updateGameGoal(int amount)
+    {
+        enemyCount += amount;
+        enemyCountText.text = enemyCount.ToString("F0");
+
+        if (enemyCount <= 0)
+        {
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+    }
+
+    public void youLose()
+    {
+        statePause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
     }
 
     private gamemanager()
