@@ -38,6 +38,15 @@ public class PlayerController : MonoBehaviour, EnemyDamage
         continuousFire = false;
         HPOrig = health;
         updatePlayerUI();
+        spawnPlayer();
+    }
+
+    public void spawnPlayer()
+    {
+        controller.enabled = false;
+        transform.position = gamemanager.instance.playerSpawnPOS.transform.position;
+        controller.enabled = true;
+        health = HPOrig;
     }
 
     // Update is called once per frame

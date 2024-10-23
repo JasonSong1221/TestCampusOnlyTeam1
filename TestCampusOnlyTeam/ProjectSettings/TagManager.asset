@@ -6,6 +6,7 @@ TagManager:
   tags:
   - debug_cube
   - monster
+  - PlayerSpawnPOS
   layers:
   - Default
   - TransparentFX
