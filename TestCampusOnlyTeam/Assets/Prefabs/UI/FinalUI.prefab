@@ -2144,17 +2144,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce9587fee825c440b0143d336e4b3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dummy: {fileID: 0}
   menuActive: {fileID: 0}
-  menuPause: {fileID: 1363331533581749178}
-  menuWin: {fileID: 1363331533582143529}
-  menuLose: {fileID: 1363331531660763657}
-  enemyCountText: {fileID: 1363331531902718733}
-  playerHPBar: {fileID: 1363331531767138119}
-  playerDamageScreen: {fileID: 1363331532864393508}
-  enemyCount: 0
-  isPaused: 0
+  menuPause: {fileID: 0}
+  menuWin: {fileID: 0}
+  menuLose: {fileID: 0}
+  enemyCountText: {fileID: 0}
+  playerHpBar: {fileID: 0}
+  playerDamageScreen: {fileID: 0}
+  dummy: {fileID: 0}
   player: {fileID: 0}
+  isPaused: 0
 --- !u!1 &1363331533001730222
 GameObject:
   m_ObjectHideFlags: 0

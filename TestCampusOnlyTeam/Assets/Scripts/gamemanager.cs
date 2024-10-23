@@ -19,26 +19,25 @@ public class gamemanager : MonoBehaviour
     Vector3 playerPositionCache;
     Quaternion playerRotationCache;
 
-    [SerializeField] GameObject dummy;
-    [SerializeField] GameObject Strongdummy;
-    [SerializeField] GameObject Strongestdummy;
-
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] TMP_Text enemyCountText;
-    
 
-    public Image playerHPBar;
+    [SerializeField] TMP_Text enemyCountText;
+
+    public Image playerHpBar;
+
     public GameObject playerDamageScreen;
 
-    public  int enemyCount;
-
-    public bool isPaused;
+    [SerializeField] GameObject dummy;
 
     float timeScaleOrig;
     public GameObject player;
+
+    public bool isPaused;
+
+    int enemyCount;
 
     bool dirtyCache;
 
@@ -51,16 +50,27 @@ public class gamemanager : MonoBehaviour
         dirtyCache = true;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F1))
+
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menuActive == null)
+            {
+                statePause();
+                menuActive = menuPause;
+                menuActive.SetActive(isPaused);
+            }
+            else if (menuActive == menuPause)
+            {
+                stateUnpause();
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             killAllMonsters();
         }
@@ -93,20 +103,6 @@ public class gamemanager : MonoBehaviour
                 pushMonster(monster);
             }
             dirtyCache = false;
-        }
-
-        if (Input.GetButtonDown("Cancel"))
-        {
-            if (menuActive == null)
-            {
-                statePause();
-                menuActive = menuPause;
-                menuActive.SetActive(isPaused);
-            }
-            else if(menuActive == menuPause)
-            {
-                stateUnpause();
-            }
         }
     }
 
@@ -158,7 +154,6 @@ public class gamemanager : MonoBehaviour
         }
     }
 
-    
     public void statePause()
     {
         isPaused = !isPaused;
@@ -182,7 +177,7 @@ public class gamemanager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("F0");
 
-        if(enemyCount <= 0)
+        if (enemyCount <= 0)
         {
             statePause();
             menuActive = menuWin;
@@ -196,5 +191,9 @@ public class gamemanager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
-    
+
+    private gamemanager()
+    {
+
+    }
 }

@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour, EnemyDamage
 
     public void updatePlayerUI()
     {
-        gamemanager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
+        gamemanager.instance.playerHpBar.fillAmount = (float)health / HPOrig;
 
     }
 

@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:TestCampusOnlyTeam/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf.meta
+guid: 0f956798ff079344f9dafced99375107
+========
 guid: 7afe964b80cc4684b81336ed62008502
 folderAsset: yes
+>>>>>>>> a4173bac12a37b7815de4743e390a1399b5f0fa4:TestCampusOnlyTeam/Assets/Scenes/SampleScene.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
