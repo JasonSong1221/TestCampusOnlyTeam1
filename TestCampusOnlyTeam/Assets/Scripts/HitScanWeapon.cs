@@ -22,8 +22,8 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
 
     bool isShooting;
     int continuousShots;
-    int ammo;
-    int clipCurrent;
+    public int ammo;
+    public int clipCurrent;
     int maxClips;
     float spread;
     bool isReloading;
@@ -80,6 +80,8 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
         ammo = startAmmo;
         clipCurrent = Mathf.Clamp(clipCurrent, clipSize, ammo);
         maxClips = (maxAmmo / clipSize);
+
+        gamemanager.instance.updateAmmoUI(clipCurrent, ammo);
     }
 
     // Update is called once per frame
@@ -104,6 +106,8 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
         ammo--;
         clipCurrent--;
 
+        gamemanager.instance.updateAmmoUI(clipCurrent, ammo);
+
         GetComponent<AudioSource>().Play();
 
         Animator ani = GetComponentInChildren<Animator>();
@@ -123,9 +127,9 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
             spread = spreadRate * continuousShots;
             spread = Mathf.Clamp(spread, minSpread, maxSpread);
 
-            castDir.x += spread * UnityEngine.Random.Range(0.0f, 1.0f);
+            /*castDir.x += spread * UnityEngine.Random.Range(0.0f, 1.0f);
             castDir.y += spread * UnityEngine.Random.Range(0.0f, 1.0f);
-            castDir.z += spread * UnityEngine.Random.Range(0.0f, 1.0f);
+            castDir.z += spread * UnityEngine.Random.Range(0.0f, 1.0f);*/
 
 
             if (Physics.Raycast(raycastPos, castDir, out hit, range, ~ignore))
@@ -177,6 +181,8 @@ public class HitScanWeapon : MonoBehaviour, IWeapon
             yield return new WaitForSeconds(0.5f);
             int amtToAdd = Mathf.Clamp(clipSize - clipCurrent, 0, ammo);
             clipCurrent += amtToAdd;
+
+            gamemanager.instance.updateAmmoUI(clipCurrent, ammo);
         }
         isReloading = false;
         ani.Play("Idle");

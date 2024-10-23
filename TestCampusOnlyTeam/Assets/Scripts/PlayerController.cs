@@ -128,6 +128,16 @@ public class PlayerController : MonoBehaviour, EnemyDamage
         currentWeapon.SetActive(false);
         currentWeapon = outweapon;
         currentWeapon.SetActive(true);
+        IWeapon weapon = currentWeapon.GetComponent<IWeapon>();
+        if (weapon != null)
+        {
+            // Assuming your IWeapon interface or class has access to `clipCurrent` and `ammo`
+            HitScanWeapon hitScanWeapon = currentWeapon.GetComponent<HitScanWeapon>();
+            if (hitScanWeapon != null)
+            {
+                gamemanager.instance.updateAmmoUI(hitScanWeapon.clipCurrent, hitScanWeapon.ammo);
+            }
+        }
         yield return new WaitForSeconds(1);
         swapping = false;
     }
