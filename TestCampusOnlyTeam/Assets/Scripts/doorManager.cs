@@ -112,13 +112,16 @@ public class doorManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        playerInRange = !playerInRange;
-        if (isOpen)
+        if (other.CompareTag("Player"))
         {
-            // isOpen = !isOpen;
-            isOpen = false;
+            playerInRange = !playerInRange;
+            if (isOpen)
+            {
+                // isOpen = !isOpen;
+                isOpen = false;
+            }
+            CloseDoor();
         }
-        CloseDoor();
     }
 
 }
