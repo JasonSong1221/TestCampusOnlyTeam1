@@ -30,7 +30,8 @@ public class gamemanager : MonoBehaviour
 
     public GameObject playerDamageScreen;
     public PlayerController playerScript;
-
+    public GameObject playerSpawnPOS;
+    public TMP_Text ammoCur, ammoMax;
     [SerializeField] GameObject dummy;
 
     float timeScaleOrig;
@@ -192,6 +193,12 @@ public class gamemanager : MonoBehaviour
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+    public void updateAmmoUI(int currentAmmo, int maxAmmo)
+    {
+        ammoCur.text = currentAmmo.ToString();
+        ammoMax.text = maxAmmo.ToString();
     }
 
     private gamemanager()

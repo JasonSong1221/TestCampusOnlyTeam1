@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuffPickupscript : MonoBehaviour
 {
+    [SerializeField] BuffPickUps buff;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class BuffPickupscript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gamemanager.instance.playerScript.getGunStats(gun);
+            gamemanager.instance.playerScript.getBuffStats(buff);
             Destroy(gameObject);
         }
     }

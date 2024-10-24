@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, EnemyDamage
 
     [SerializeField] Camera cam;
     [SerializeField] CharacterController controller;
+
     [SerializeField] GameObject currentWeapon;
     [SerializeField] GameObject handgun;
     [SerializeField] GameObject shotgun;
@@ -190,6 +191,21 @@ public class PlayerController : MonoBehaviour, EnemyDamage
 
     public void getBuffStats(BuffPickUps buff)
     {
+        if (buff.HealAmount > 0)
+        {
+            health += buff.HealAmount;
+            
+            if (health > HPOrig)
+            {
+                health = HPOrig;
+            }
+            updatePlayerUI(); 
+        }
 
+       
+        if (buff.SpeedMod > 0)
+        {
+            speed *= buff.SpeedMod;
+        }
     }
 }
