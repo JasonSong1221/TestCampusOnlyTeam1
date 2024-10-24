@@ -29,6 +29,7 @@ public class gamemanager : MonoBehaviour
     public Image playerHpBar;
 
     public GameObject playerDamageScreen;
+    public PlayerController playerScript;
 
     [SerializeField] GameObject dummy;
 
@@ -47,6 +48,7 @@ public class gamemanager : MonoBehaviour
         instance = this;
         timeScaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<PlayerController>();
         dirtyCache = true;
     }
 

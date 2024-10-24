@@ -168,4 +168,9 @@ public class PlayerController : MonoBehaviour, EnemyDamage
             speed /= sprintMod;
         }
     }
+
+    public void getBuffStats(BuffPickUps buff)
+    {
+
+    }
 }
