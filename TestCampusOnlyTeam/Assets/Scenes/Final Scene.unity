@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 79f33877820b8684692534500d301d6a, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -20481,6 +20481,11 @@ Transform:
   m_Father: {fileID: 1889151143}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1343393110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2813768347423373548, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
+  m_PrefabInstance: {fileID: 417319633096251385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1344163757
 GameObject:
   m_ObjectHideFlags: 0
@@ -32446,18 +32451,13 @@ PrefabInstance:
     - target: {fileID: 2887395403401787136, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
       propertyPath: currentWeapon
       value: 
-      objectReference: {fileID: 417319633096251386}
+      objectReference: {fileID: 1343393110}
     - target: {fileID: 6426648653225849182, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
       propertyPath: m_Name
       value: PlayerFinal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
---- !u!1 &417319633096251386 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5702777698793808770, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
-  m_PrefabInstance: {fileID: 417319633096251385}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &460208708452332016
 PrefabInstance:
   m_ObjectHideFlags: 0

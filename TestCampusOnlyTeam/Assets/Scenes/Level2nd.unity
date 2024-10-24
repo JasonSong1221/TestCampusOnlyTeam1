@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 48410d8c473394a4e97e211cf869c923, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -4005,18 +4005,13 @@ PrefabInstance:
     - target: {fileID: 2887395403401787136, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
       propertyPath: currentWeapon
       value: 
-      objectReference: {fileID: 1393880305}
+      objectReference: {fileID: 1886030309}
     - target: {fileID: 6426648653225849182, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
       propertyPath: m_Name
       value: PlayerFinal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
---- !u!1 &1393880305 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5702777698793808770, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
-  m_PrefabInstance: {fileID: 1393880304}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1447805099
 Mesh:
   m_ObjectHideFlags: 0
@@ -5736,6 +5731,11 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: -0.5, y: 0, z: 0}
+--- !u!1 &1886030309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2813768347423373548, guid: eed7af3843aa6d04290260ef78fbe207, type: 3}
+  m_PrefabInstance: {fileID: 1393880304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1911642958
 GameObject:
   m_ObjectHideFlags: 0
