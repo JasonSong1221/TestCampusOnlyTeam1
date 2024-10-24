@@ -104,7 +104,8 @@ public class doorManager : MonoBehaviour
             playerInRange = !playerInRange;
             if (playerInRange)
             {
-                isOpen = !isOpen;
+                //isOpen = !isOpen;
+                isOpen = true;
             }
         }
     }
@@ -114,7 +115,8 @@ public class doorManager : MonoBehaviour
         playerInRange = !playerInRange;
         if (isOpen)
         {
-            isOpen = !isOpen;
+            // isOpen = !isOpen;
+            isOpen = false;
         }
         CloseDoor();
     }
