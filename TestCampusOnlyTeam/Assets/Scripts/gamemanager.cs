@@ -18,7 +18,7 @@ public class gamemanager : MonoBehaviour
 
     Vector3 playerPositionCache;
     Quaternion playerRotationCache;
-
+    
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -50,6 +50,7 @@ public class gamemanager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        playerSpawnPOS = GameObject.FindWithTag("PlayerSpawnPOS");
         dirtyCache = true;
     }
 
@@ -180,12 +181,7 @@ public class gamemanager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("F0");
 
-        if (enemyCount <= 0)
-        {
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
-        }
+        
     }
 
     public void youLose()
@@ -199,6 +195,16 @@ public class gamemanager : MonoBehaviour
     {
         ammoCur.text = currentAmmo.ToString();
         ammoMax.text = maxAmmo.ToString();
+    }
+    public void ShowWinMenu()
+    {
+        statePause();
+        menuActive = menuWin;
+        menuActive.SetActive(true);
+    }
+    public int GetEnemyCount()
+    {
+        return enemyCount;
     }
 
     private gamemanager()

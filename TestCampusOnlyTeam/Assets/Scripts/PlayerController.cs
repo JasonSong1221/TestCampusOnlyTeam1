@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour, EnemyDamage
         HPOrig = health;
         updatePlayerUI();
         spawnPlayer();
+
     }
 
     public void spawnPlayer()
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour, EnemyDamage
         transform.position = gamemanager.instance.playerSpawnPOS.transform.position;
         controller.enabled = true;
         health = HPOrig;
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -205,7 +207,31 @@ public class PlayerController : MonoBehaviour, EnemyDamage
        
         if (buff.SpeedMod > 0)
         {
-            speed *= buff.SpeedMod;
+            StartCoroutine(ApplySpeedBoost(buff.SpeedMod, buff.SpeedBoostDuration));
         }
+        if (buff.ClipAmount > 0 && currentWeapon != null)
+        {
+            IWeapon weapon = currentWeapon.GetComponent<IWeapon>();
+            if (weapon != null)
+            {
+                HitScanWeapon hitScanWeapon = currentWeapon.GetComponent<HitScanWeapon>();
+                if (hitScanWeapon != null)
+                {
+                    hitScanWeapon.IncreaseClips(buff.ClipAmount);
+                    gamemanager.instance.updateAmmoUI(hitScanWeapon.clipCurrent, hitScanWeapon.ammo);
+                }
+            }
+        }
+    }
+    IEnumerator ApplySpeedBoost(float speedMultiplier, float duration)
+    {
+        
+        speed *= speedMultiplier;
+
+        
+        yield return new WaitForSeconds(duration);
+
+        
+        speed /= speedMultiplier;
     }
 }
