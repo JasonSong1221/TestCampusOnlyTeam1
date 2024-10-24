@@ -38,6 +38,15 @@ public class PlayerController : MonoBehaviour, EnemyDamage
         continuousFire = false;
         HPOrig = health;
         updatePlayerUI();
+        spawnPlayer();
+    }
+
+    public void spawnPlayer()
+    {
+        controller.enabled = false;
+        transform.position = gamemanager.instance.playerSpawnPOS.transform.position;
+        controller.enabled = true;
+        health = HPOrig;
     }
 
     // Update is called once per frame
@@ -128,6 +137,16 @@ public class PlayerController : MonoBehaviour, EnemyDamage
         currentWeapon.SetActive(false);
         currentWeapon = outweapon;
         currentWeapon.SetActive(true);
+        IWeapon weapon = currentWeapon.GetComponent<IWeapon>();
+        if (weapon != null)
+        {
+            // Assuming your IWeapon interface or class has access to `clipCurrent` and `ammo`
+            HitScanWeapon hitScanWeapon = currentWeapon.GetComponent<HitScanWeapon>();
+            if (hitScanWeapon != null)
+            {
+                gamemanager.instance.updateAmmoUI(hitScanWeapon.clipCurrent, hitScanWeapon.ammo);
+            }
+        }
         yield return new WaitForSeconds(1);
         swapping = false;
     }
